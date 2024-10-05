@@ -1,10 +1,12 @@
 import {
   doublePrecision,
-  pgTable,
+  pgTableCreator,
   serial,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
+
+const pgTable = pgTableCreator((name) => `nextAiSearch_${name}`);
 
 export const documents = pgTable("documents", {
   id: serial("id").primaryKey(),

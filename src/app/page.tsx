@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { db } from "~/lib/db/db";
 import { documents } from "~/lib/db/schema";
 
