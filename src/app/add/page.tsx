@@ -1,5 +1,16 @@
-import { embed } from "ai";
+import { embedMany } from "ai";
+import { sql } from "drizzle-orm";
+import { db } from "~/lib/db/db";
+import { documents } from "~/lib/db/schema";
 import { openaiEmbeddingModel } from "~/lib/model-provider";
+
+function generateChunks(input: string) {
+  return input
+    .trim()
+    .split(".")
+    .map((i) => i.replaceAll("\n", ""))
+    .filter((i) => i !== "");
+}
 
 export default async function AddPage() {
   async function addAction(formData: FormData) {
@@ -11,13 +22,19 @@ export default async function AddPage() {
       throw new Error("Content is required");
     }
 
-    let { embedding } = await embed({
+    let chunks = generateChunks(content);
+
+    let { embeddings } = await embedMany({
       model: openaiEmbeddingModel,
-      value: content.trim(),
+      values: chunks,
     });
 
-    console.log(embedding);
-    console.log("Dimensions:", embedding.length);
+    await db.insert(documents).values(
+      embeddings.map((embedding, idx) => ({
+        content: chunks[idx],
+        embedding: sql`${JSON.stringify(embedding)}::vector`, // Something is off with RDS casting,
+      })),
+    );
   }
 
   return (
@@ -39,7 +56,7 @@ export default async function AddPage() {
             type="submit"
             className="p-4 bg-blue-500 text-white rounded-sm font-semibold"
           >
-            Add to search
+            Add
           </button>
         </form>
       </main>
