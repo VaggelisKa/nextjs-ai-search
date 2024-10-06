@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { searchAction } from "~/lib/actions";
+import { SubmitButton } from "./submit-button";
 
 export function SearchForm() {
   let [results, setResults] = useState<
@@ -26,12 +27,7 @@ export function SearchForm() {
         name="search"
       />
 
-      <button
-        type="submit"
-        className="p-4 bg-blue-500 text-white rounded-sm font-semibold"
-      >
-        Search
-      </button>
+      <SubmitButton>Search</SubmitButton>
 
       <Link className="underline mx-auto" href="/add" prefetch={false}>
         Add {"->"}

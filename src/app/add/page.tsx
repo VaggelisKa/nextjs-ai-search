@@ -1,3 +1,4 @@
+import { SubmitButton } from "~/components/submit-button";
 import { addAction } from "~/lib/actions";
 
 export default async function AddPage() {
@@ -16,12 +17,7 @@ export default async function AddPage() {
             name="add"
           />
 
-          <button
-            type="submit"
-            className="p-4 bg-blue-500 text-white rounded-sm font-semibold"
-          >
-            Add
-          </button>
+          <SubmitButton>Add</SubmitButton>
         </form>
       </main>
     </div>
