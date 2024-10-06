@@ -14,3 +14,4 @@ npx sst dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## App sample
+![image](https://github.com/user-attachments/assets/cdc34997-70c1-444e-b407-46b4e9159f3e)
