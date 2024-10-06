@@ -17,7 +17,7 @@ export const documents = pgTable(
       .primaryKey()
       .$defaultFn(() => generateId(191)),
     content: text("content").notNull(),
-    embedding: vector("embedding", { dimensions: 1024 }).notNull(),
+    embedding: vector("embedding", { dimensions: 1536 }).notNull(),
     createdAt: timestamp("created_at").defaultNow(),
   },
   (table) => ({

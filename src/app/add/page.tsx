@@ -1,8 +1,23 @@
+import { embed } from "ai";
+import { openaiEmbeddingModel } from "~/lib/model-provider";
+
 export default async function AddPage() {
-  async function searchAction(formData: FormData) {
+  async function addAction(formData: FormData) {
     "use server";
 
-    console.log(formData.get("add"));
+    let content = formData.get("add");
+
+    if (!content || typeof content !== "string") {
+      throw new Error("Content is required");
+    }
+
+    let { embedding } = await embed({
+      model: openaiEmbeddingModel,
+      value: content.trim(),
+    });
+
+    console.log(embedding);
+    console.log("Dimensions:", embedding.length);
   }
 
   return (
@@ -11,7 +26,7 @@ export default async function AddPage() {
         <span>Add text to database</span>
 
         <form
-          action={searchAction}
+          action={addAction}
           className="flex flex-col gap-4 w-full min-w-[500px]"
         >
           <textarea
