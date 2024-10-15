@@ -10,9 +10,9 @@ export const bedrock = createAmazonBedrock({
   secretAccessKey: Resource.AWS_SECRET_ACCESS_KEY.value,
 });
 
-// export const bedrockEmbeddingModel = bedrock.textEmbeddingModel(
-//   "amazon.titan-embed-text-v1",
-// );
+export const bedrockEmbeddingModel = bedrock.textEmbeddingModel(
+  "amazon.titan-embed-text-v1",
+);
 
 const openai = createOpenAI({
   apiKey: Resource.OPENAI_API_KEY.value,

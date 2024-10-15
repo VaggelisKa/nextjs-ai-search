@@ -4,7 +4,7 @@ import { embed, embedMany } from "ai";
 import { desc, gt, sql } from "drizzle-orm";
 import { db } from "./db/db";
 import { documents } from "./db/schema";
-import { openaiEmbeddingModel } from "./model-provider";
+import { bedrockEmbeddingModel, openaiEmbeddingModel } from "./model-provider";
 
 export async function searchAction(formData: FormData) {
   let content = formData.get("search");
@@ -14,7 +14,7 @@ export async function searchAction(formData: FormData) {
   }
 
   let { embedding } = await embed({
-    model: openaiEmbeddingModel,
+    model: bedrockEmbeddingModel,
     value: content,
   });
 

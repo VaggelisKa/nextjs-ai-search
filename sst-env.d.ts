@@ -5,34 +5,5 @@ import "sst"
 export {}
 declare module "sst" {
   export interface Resource {
-    "AWS_ACCESS_KEY_ID": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "AWS_SECRET_ACCESS_KEY": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "OPENAI_API_KEY": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "WebApp": {
-      "type": "sst.aws.Nextjs"
-      "url": string
-    }
-    "experimentsDb": {
-      "clusterArn": string
-      "database": string
-      "host": string
-      "password": string
-      "port": number
-      "secretArn": string
-      "type": "sst.aws.Postgres"
-      "username": string
-    }
-    "experimentsVpc": {
-      "type": "sst.aws.Vpc"
-    }
   }
 }
